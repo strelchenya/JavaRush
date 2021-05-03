@@ -4,7 +4,7 @@ package com.javarush.task.task22.task2212;
 Проверка номера телефона
 */
 
-import java.util.ArrayList;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,7 +21,6 @@ public class Solution {
         System.out.println(checkTelNumber("+38(050)1234567"));
         System.out.println(checkTelNumber("+38050123-45-67"));
         System.out.println(checkTelNumber("050123456"));
-        System.out.println(checkTelNumber("eggeherh3"));
 
     }
 }
