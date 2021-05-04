@@ -9,7 +9,8 @@ public class Room {
     private Mouse mouse;
 
     public static Room game;
-
+    private int startTime = 520;
+    private int stepTime = 20;
     public Room(int width, int height, Snake snake) {
         this.width = width;
         this.height = height;
@@ -114,6 +115,14 @@ public class Room {
     }
 
     public void sleep() {
-        // делаем паузу, длинна которой зависит от длинны змеи
+
+        try {
+            int snakLength = snake.getSections().size();
+            int LevelTime = snakLength < 15 ? (startTime - stepTime * snakLength) : 200;
+            Thread.sleep(LevelTime);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
     }
 }
