@@ -12,7 +12,7 @@ public class Solution {
     }
 
     public static Solution[] getTwoSolutions() {
-        Solution[] result = new Solution[2];
+        Solution[] solutions = new Solution[2];
 
         Solution solution = new Solution();
         solution.innerClasses[0] = solution.new InnerClass();
@@ -22,10 +22,10 @@ public class Solution {
         solution2.innerClasses[0] = solution.new InnerClass();
         solution2.innerClasses[1] = solution.new InnerClass();
 
-        result[0] = solution;
-        result[1] = solution2;
+        solutions[0] = solution;
+        solutions[1] = solution2;
 
-        return result;
+        return solutions;
     }
 
     public static void main(String[] args) {
