@@ -6,6 +6,9 @@ package com.javarush.task.task23.task2307;
 
 public class Solution {
     public static final String TEST = "test";
+    static Object obj;
+
+
 
     public static class TEST {
         @Override
@@ -13,11 +16,10 @@ public class Solution {
             return "test class";
         }
     }
-
-    static Object obj;
-
     public static void main(String[] args) {
-        obj = Solution.TEST;
+
+        obj = new TEST();
+
         System.out.println(obj);
     }
 }
