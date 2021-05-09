@@ -5,11 +5,16 @@ import java.util.List;
 public class Arkanoid {
     private int width;
     private int height;
+    public static Arkanoid game;
+
     private Ball ball;
     private Stand stand;
     private List<Brick> bricks;
-    
-    static Arkanoid game;
+
+    public Arkanoid(int width, int height) {
+        this.width = width;
+        this.height = height;
+    }
 
     public Ball getBall() {
         return ball;
@@ -51,20 +56,15 @@ public class Arkanoid {
         this.height = height;
     }
 
+    void run() {
+
+    }
+
+    void move() {
+
+    }
+
     public static void main(String[] args) {
-
-    }
-
-    public Arkanoid(int width, int height) {
-        this.width = width;
-        this.height = height;
-    }
-
-    public void run(){
-
-    }
-
-    public void move(){
 
     }
 }
