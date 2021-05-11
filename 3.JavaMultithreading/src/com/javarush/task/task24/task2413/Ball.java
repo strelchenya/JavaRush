@@ -54,11 +54,27 @@ public class Ball extends BaseObject {
 
     @Override
     void draw(Canvas canvas) {
-
+            canvas.setPoint(getX(), getY(), 'O');
     }
 
     @Override
     void move() {
+        if (!isFrozen) {
+            setX(getX() + dx);
+            setY(getY() + dy);
+        }
+    }
+    void start(){
+        isFrozen = false;
+    }
 
+    void setDirection(){
+        this.direction = direction;
+        double angle = Math.toRadians(direction);
+        dx = Math.cos(angle) * speed;
+        dy = -Math.sin(angle) * speed;
+    }
+    void checkRebound(int minx, int maxx, int miny, int maxy){
+        
     }
 }
