@@ -1,11 +1,5 @@
 package com.javarush.task.task19.task1918;
 
-import org.jsoup.*;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.parser.Parser;
-import org.jsoup.select.Elements;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
