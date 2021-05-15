@@ -28,7 +28,7 @@ public class Solution {
                 if (f.isDirectory())fileQueue.add(f);
                 //если новый файл является файлом, то добавляем его имя в список имён
                 else if (f.isFile()) {
-                    listFile.add(f.getName());
+                    listFile.add(f.getAbsolutePath());
                 }
             }
         }
