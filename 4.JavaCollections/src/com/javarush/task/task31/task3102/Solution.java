@@ -13,7 +13,7 @@ import java.util.*;
 public class Solution {
     public static List<String> getFileTree(String root) throws IOException {
         //создал двухсвязанную очередь
-        Queue<File> fileQueue = new LinkedList<>();
+        LinkedList<File> fileQueue = new LinkedList<>();
         //созал файл
         File file = new File(root);
         //создал список в который будем сохранять имена всех файлов
@@ -25,7 +25,7 @@ public class Solution {
             //цикл: берём и удаляем файл с очереди, переводя его в список файлов в директории
             for (File f: fileQueue.poll().listFiles()) {
                 //если новый файл из директории тоже дирректория, то добавляем его в список
-                if (f.isDirectory())fileQueue.add(f);
+                if (f.isDirectory())fileQueue.addLast(f);
                 //если новый файл является файлом, то добавляем его имя в список имён
                 else if (f.isFile()) {
                     listFile.add(f.getAbsolutePath());
