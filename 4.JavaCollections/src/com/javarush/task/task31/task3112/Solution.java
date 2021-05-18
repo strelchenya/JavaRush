@@ -29,9 +29,12 @@ public class Solution {
         Path tempFile = Files.createTempFile("temp-",".tmp");
         Files.copy(inputStream, tempFile);
 
+        if (Files.notExists(downloadDirectory)) Files.createDirectories(downloadDirectory);
         //достаём имя файла из URL
         Path fileName = Paths.get(url.getFile()).getFileName();
         Path absolutelyFileName = downloadDirectory.resolve(fileName);
+
+        //удалять при переносе временный файл StandardCopyOption.REPLACE_EXISTING
         return Files.move(tempFile, absolutelyFileName,StandardCopyOption.REPLACE_EXISTING);
     }
 }
