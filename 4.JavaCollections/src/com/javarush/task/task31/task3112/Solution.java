@@ -26,7 +26,8 @@ public class Solution {
         URL url = new URL(urlString);
         InputStream inputStream = url.openStream();
 
-        Path tempFile = Files.createTempFile("temp-",".tmp");
+//        Path tempFile = Files.createTempFile("temp-",".tmp");
+        Path tempFile = Paths.get(Files.createTempFile("name-[", "]").toString().split(".+\\\\", 2)[1]);
         Files.copy(inputStream, tempFile);
 
         if (Files.notExists(downloadDirectory)) Files.createDirectories(downloadDirectory);
@@ -34,7 +35,9 @@ public class Solution {
         Path fileName = Paths.get(url.getFile()).getFileName();
         Path absolutelyFileName = downloadDirectory.resolve(fileName);
 
+        inputStream.close();
+
         //удалять при переносе временный файл StandardCopyOption.REPLACE_EXISTING
-        return Files.move(tempFile, absolutelyFileName,StandardCopyOption.REPLACE_EXISTING);
+        return Files.move(tempFile, absolutelyFileName, StandardCopyOption.REPLACE_EXISTING);
     }
 }
