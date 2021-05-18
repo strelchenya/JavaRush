@@ -45,8 +45,8 @@ public class Solution extends SimpleFileVisitor<Path> {
     // в случае, если он является zip или rar архивом, добавляет его адрес(path) в виде строки к списку архивных файлов;
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-        if (file.toAbsolutePath().toString().endsWith(".rar") || file.toAbsolutePath().toString().endsWith(".zip"))
-            archived.add(file.toAbsolutePath().toString());
+        if (file.toString().endsWith(".rar") || file.toString().endsWith(".zip"))
+            archived.add(file.toString());
         //CONTINUE — продолжать проходить дирркторию
         return FileVisitResult.CONTINUE;
     }
@@ -56,7 +56,7 @@ public class Solution extends SimpleFileVisitor<Path> {
     // и программа продолжает обход, не посещая его поддиректории;
     @Override
     public FileVisitResult visitFileFailed(Path file, IOException exc) throws IOException {
-        failed.add(file.toAbsolutePath().toString());
+        failed.add(file.toString());
         //SKIP_SUBTREE — продолжает обход, без захода в данную директорию;
         return FileVisitResult.SKIP_SUBTREE;
     }
