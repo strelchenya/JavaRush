@@ -29,8 +29,9 @@ public class Solution {
         Path tempFile = Files.createTempFile("temp-",".tmp");
         Files.copy(inputStream, tempFile);
 
-        String[] namesFile = urlString.split("/");
-        return Files.move(tempFile, Paths.get(downloadDirectory.toString() +
-                "/" + namesFile[namesFile.length-1]),StandardCopyOption.REPLACE_EXISTING);
+        //достаём имя файла из URL
+        Path fileName = Paths.get(url.getFile()).getFileName();
+        Path absolutelyFileName = downloadDirectory.resolve(fileName);
+        return Files.move(tempFile, absolutelyFileName,StandardCopyOption.REPLACE_EXISTING);
     }
 }
