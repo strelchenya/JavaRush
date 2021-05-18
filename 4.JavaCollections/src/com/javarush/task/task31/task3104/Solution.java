@@ -40,4 +40,24 @@ public class Solution extends SimpleFileVisitor<Path> {
     public List<String> getFailed() {
         return failed;
     }
+
+    //метод во время обхода дерева при посещении файла,
+    // в случае, если он является zip или rar архивом, добавляет его адрес(path) в виде строки к списку архивных файлов;
+    @Override
+    public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+        if (file.toAbsolutePath().toString().endsWith(".rar") || file.toAbsolutePath().toString().endsWith(".zip"))
+            archived.add(file.toAbsolutePath().toString());
+        //CONTINUE — продолжать проходить дирркторию
+        return FileVisitResult.CONTINUE;
+    }
+
+    //В случае неудачной попытки доступа к path,
+    //данный путь в виде строки добавляется в лист failed ему подобных,
+    // и программа продолжает обход, не посещая его поддиректории;
+    @Override
+    public FileVisitResult visitFileFailed(Path file, IOException exc) throws IOException {
+        failed.add(file.toAbsolutePath().toString());
+        //SKIP_SUBTREE — продолжает обход, без захода в данную директорию;
+        return FileVisitResult.SKIP_SUBTREE;
+    }
 }
