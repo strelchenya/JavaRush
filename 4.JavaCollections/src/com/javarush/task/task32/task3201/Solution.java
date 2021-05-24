@@ -17,12 +17,15 @@ public class Solution {
         byte[] text = args[2].getBytes(StandardCharsets.UTF_8);
 
         RandomAccessFile raf = new RandomAccessFile(fileName, "rw");
+
         long length = raf.length();
+
         if ((length - number) < text.length) {
             raf.seek(length);
             raf.write(text);
             raf.close();
         }
+
         raf.seek(number);
         raf.write(text);
         raf.close();
