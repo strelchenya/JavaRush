@@ -15,7 +15,19 @@ public class Solution {
         System.out.println(decode(reader, -3));  //Hello Amigo #@)₴?$0
     }
 
+
     public static String decode(StringReader reader, int key) throws IOException {
+        StringBuilder builder = new StringBuilder();
+        int ch1;
+        if (reader != null) {
+            while ((ch1 = reader.read()) != -1) {
+                char ch = (char) ch1;
+                builder.append((char) (ch + key));
+            }
+        }
+        return builder.toString();
+    }
+/*    public static String decode(StringReader reader, int key) throws IOException {
         if (reader == null){
             return "";
         }
@@ -29,5 +41,5 @@ public class Solution {
         }
 
         return sb.toString();
-    }
+    }*/
 }
