@@ -13,6 +13,19 @@ public class Solution {
     }
 
     public static StringWriter getAllDataFromInputStream(InputStream is) throws IOException {
-        return null;
+        if (is == null) {
+            return new StringWriter();
+        }
+
+        StringBuilder sb = new StringBuilder();
+        int ch = 0;
+        while ((ch = is.read()) != -1){
+            sb.append((char)ch);
+        }
+
+        String line = sb.toString();
+        StringWriter stringWriter = new StringWriter();
+        stringWriter.write(line);
+        return stringWriter;
     }
 }
