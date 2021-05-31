@@ -37,7 +37,19 @@ public class Solution {
     public static Thread SERVER_THREAD = new Thread(new Runnable() {
         @Override
         public void run() {
-            //напишите тут ваш код
+            try {
+                registry = LocateRegistry.createRegistry(2099);
+                Cat cat = new Cat("Нянко");
+                Dog dog = new Dog("Ненянко");
+                Remote stubCat = UnicastRemoteObject.exportObject(cat, 2099);
+                Remote stubDog = UnicastRemoteObject.exportObject(dog, 2099);
+                registry.bind("мяу", stubCat);
+                registry.bind("гав", stubDog);
+            } catch (RemoteException e) {
+                e.printStackTrace(System.err);
+            } catch (AlreadyBoundException e) {
+                e.printStackTrace(System.err);
+            }
         }
     });
 
