@@ -20,7 +20,16 @@ public class Solution {
     public static Thread CLIENT_THREAD = new Thread(new Runnable() {
         @Override
         public void run() {
-            //напишите тут ваш код
+
+            try {
+                DoubleString doubleString = (DoubleString) registry.lookup(UNIC_BINDING_NAME);
+                String result = doubleString.doubleString(" ОМГ, какие же проблемы с этими исключениями");
+                System.out.println(result);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            } catch (NotBoundException e) {
+                e.printStackTrace();
+            }
         }
     });
 
