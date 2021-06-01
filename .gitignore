@@ -1,4 +1,8 @@
 JavaRushPlugin.properties
+*.png
+*.iml
+*.xml
+
 # Compiled class file
 *.class
 

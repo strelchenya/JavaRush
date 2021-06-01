@@ -2,10 +2,10 @@ package com.javarush.task.task33.task3304;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
-import java.io.StringReader;
 import java.io.StringWriter;
 
 /* 
@@ -19,7 +19,15 @@ public class Solution {
     }
 
     public static Object convertOneToAnother(Object one, Class resultClassObject) throws IOException {
-        return null;
+
+        StringWriter writer = new StringWriter();
+        ObjectMapper mapper = new ObjectMapper();
+        //отключаем аннотации в классах
+        mapper.disable(MapperFeature.USE_ANNOTATIONS);
+        //создаём Json
+        mapper.writeValue(writer, one);
+        //шпуляем обратно под другим классом
+        return mapper.readValue (writer.toString(), resultClassObject);
     }
 
     @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "className")
