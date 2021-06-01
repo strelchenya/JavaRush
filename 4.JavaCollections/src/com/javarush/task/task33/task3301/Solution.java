@@ -38,17 +38,23 @@ public class Solution {
         mapper.writeValue(writer, object);
     }
 
+    @JsonAutoDetect
     public static class Pet {
-        String name;
+       public String name;
+
     }
 
+    @JsonAutoDetect
     public static class Cat extends Pet {
-        int age;
-        int weight;
+       public int age;
+        public int weight;
+
     }
 
+    @JsonAutoDetect
     public static class Dog extends Pet {
-        int age;
-        String owner;
+        public int age;
+        public String owner;
+
     }
 }
