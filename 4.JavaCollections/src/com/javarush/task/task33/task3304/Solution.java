@@ -20,7 +20,7 @@ public class Solution {
     }
 
     public static Object convertOneToAnother(Object one, Class resultClassObject) throws IOException {
-
+        //способ костылём
         StringWriter writer = new StringWriter();
         ObjectMapper mapper1 = new ObjectMapper();
         mapper1.writeValue(writer, one);
