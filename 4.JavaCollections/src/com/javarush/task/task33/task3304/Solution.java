@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
+import java.io.StringReader;
 import java.io.StringWriter;
 
 /* 
@@ -21,6 +22,21 @@ public class Solution {
     public static Object convertOneToAnother(Object one, Class resultClassObject) throws IOException {
 
         StringWriter writer = new StringWriter();
+        ObjectMapper mapper1 = new ObjectMapper();
+        mapper1.writeValue(writer, one);
+        String ss = writer.toString();
+        String key1 = "\"" + one.getClass().getSimpleName().toLowerCase() + "\"";
+        String key2 = "\"" + resultClassObject.getSimpleName().toLowerCase() + "\"";
+        ss = ss.replaceFirst(key1, key2);
+
+        StringReader reader = new StringReader(ss);
+        ObjectMapper mapper2 = new ObjectMapper();
+        return mapper2.readValue(reader, resultClassObject);
+
+
+       /*
+       --------------------Первый вариант через mapper.disable -------------------------
+        StringWriter writer = new StringWriter();
         ObjectMapper mapper = new ObjectMapper();
         //отключаем аннотации в классах
         mapper.disable(MapperFeature.USE_ANNOTATIONS);
@@ -28,6 +44,7 @@ public class Solution {
         mapper.writeValue(writer, one);
         //шпуляем обратно под другим классом
         return mapper.readValue (writer.toString(), resultClassObject);
+        */
     }
 
     @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "className")
