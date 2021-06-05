@@ -64,20 +64,25 @@ public class Solution {
 
         InputStream stream = new ByteArrayInputStream(writer.toString().getBytes(StandardCharsets.UTF_8));
         //преобразовываем в строку все записанное в StringWriter
-       // String result = writer.toString();
+        // String result = writer.toString();
 
+        // Получение фабрики, чтобы после получить билдер документов.
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         //проверяет, сконфигурирован ли DOM-анализатор для преобразования узлов типа CDATA в узлы типа Text
         // и присоединяют их к соседнему узлу (если он существует) в документе XML
         // или устанавливают режим такого преобразования в документе XML (при значении coalescing, равном true)
         // По умолчанию значение coalescing установлено в false.)
         dbf.setCoalescing(true);
+
+        // Получили из фабрики билдер, который парсит XML, создает структуру Document в виде иерархического дерева.
         DocumentBuilder db = null;
         try {
             db = dbf.newDocumentBuilder();
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
         }
+
+        // Запарсили XML, создав структуру Document. Теперь у нас есть доступ ко всем элементам, каким нам нужно.
         Document doc = null;
         try {
             doc = db.parse(stream);
@@ -88,13 +93,22 @@ public class Solution {
             e.printStackTrace();
         }
 
+        // Получение списка всех элементов tagName внутри корневого элемента
+        // (getDocumentElement возвращает ROOT элемент XML файла).
         NodeList nodeList = doc.getElementsByTagName(tagName);
 
+        // Перебор всех элементов tagName
         for (int s = 0; s < nodeList.getLength(); s++) {
             Node node = nodeList.item(s);
+
             if (node.getNodeName().equals(tagName)) {
                 node.getParentNode().insertBefore(doc.createComment(comment), node);
                 node.getParentNode().insertBefore(doc.createTextNode("\n"), node);
+                if (node.getTextContent().matches(".*[<>&'\"].*")) {
+                    String textCDATA = String.format("<![CDATA[%s]]>", node.getTextContent());
+                    node.setTextContent(textCDATA);
+                    //node.getParentNode().appendChild(doc.createCDATASection(textCDATA));
+                }
             }
         }
 
@@ -106,10 +120,11 @@ public class Solution {
         try {
             transformer = factory.newTransformer();
 
-        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-        transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
-        transformer.setOutputProperty(OutputKeys.STANDALONE, "no");
-        transformer.transform(source, result);
+            //перенос строки
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+            transformer.setOutputProperty(OutputKeys.STANDALONE, "no");
+            transformer.transform(source, result);
         } catch (TransformerConfigurationException e) {
             e.printStackTrace();
         } catch (TransformerException e) {
@@ -118,7 +133,7 @@ public class Solution {
         return sw.toString();
     }
 
-    public static void main(String[] args)  {
+    public static void main(String[] args) {
         System.out.println(Solution.toXmlWithComment(new First(), "second", "it's a comment"));
     }
 
