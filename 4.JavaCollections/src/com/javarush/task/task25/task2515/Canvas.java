@@ -29,7 +29,7 @@ public class Canvas {
         int b = (int) Math.round(y);
         if (((0 <= a && a < matrix[0].length) &&
                 (0 <= b && b < matrix.length))) {
-                matrix[b][a] = c;
+            matrix[b][a] = c;
         }
 
     }
@@ -38,10 +38,34 @@ public class Canvas {
 
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
-                if (matrix[i][j] != 0){
+                if (matrix[i][j] != 0) {
                     setPoint(x + j, y + i, c);
                 }
             }
         }
     }
+
+    public void clear() {
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                matrix[i][j] = ' ';
+            }
+        }
+
+    }
+
+    public void print(){
+
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                System.out.print(matrix[i][j]);
+            }
+            System.out.println();
+        }
+        System.out.println();
+        System.out.println();
+    }
+
+
+
 }
