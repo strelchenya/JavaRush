@@ -29,7 +29,11 @@ public class Solution {
 
         Monkey monkey = new Monkey("Simka");
 
-        //Add reference here
+        WeakReference<Monkey> reference = new WeakReference<Monkey>(monkey);
+
+        monkey = null;
+        monkey = reference.get();
+        reference.clear();
 
         helper.callGC();
 
