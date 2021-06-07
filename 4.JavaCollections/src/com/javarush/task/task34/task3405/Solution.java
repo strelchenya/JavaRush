@@ -29,7 +29,14 @@ public class Solution {
 
         Monkey monkey = new Monkey("Simka");
 
-        //Add reference here
+        //создание мягкой ссылки на объект Monkey
+        SoftReference<Monkey> reference = new SoftReference<Monkey>(monkey);
+        //теперь на объект ссылается только мягкая ссылка reference
+        monkey = null;
+        //теперь на объект ссылается еще и обычная переменная monkey
+        monkey = reference.get();
+        //очищаем мягкую ссылку
+        reference.clear();
 
         helper.callGC();
 
