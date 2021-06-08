@@ -9,22 +9,28 @@ public class SoftCache {
 
     public AnyObject get(Long key) {
         SoftReference<AnyObject> softReference = cacheMap.get(key);
-            if (softReference == null){
-                return null;
-            }
-
-        return ;
+        AnyObject o = softReference == null ? null : softReference.get();
+        if (softReference != null) {
+            softReference.clear();
+        }
+        return o;
     }
 
     public AnyObject put(Long key, AnyObject value) {
         SoftReference<AnyObject> softReference = cacheMap.put(key, new SoftReference<>(value));
-
-        //напишите тут ваш код
+        AnyObject o = softReference == null ? null : softReference.get();
+        if (softReference != null) {
+            softReference.clear();
+        }
+        return o;
     }
 
     public AnyObject remove(Long key) {
         SoftReference<AnyObject> softReference = cacheMap.remove(key);
-
-        //напишите тут ваш код
+        AnyObject o = softReference == null ? null : softReference.get();
+        if (softReference != null) {
+            softReference.clear();
+        }
+        return o;
     }
 }
