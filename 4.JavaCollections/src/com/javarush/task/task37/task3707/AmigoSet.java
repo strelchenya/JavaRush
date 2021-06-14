@@ -2,6 +2,7 @@ package com.javarush.task.task37.task3707;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.function.Consumer;
 
 public class AmigoSet<E> extends AbstractSet<E> implements Set<E>, Cloneable, Serializable {
     private static final Object PRESENT = new Object();
@@ -22,11 +23,34 @@ public class AmigoSet<E> extends AbstractSet<E> implements Set<E>, Cloneable, Se
 
     @Override
     public Iterator<E> iterator() {
-        return null;
+        Iterator<E> iteratorMap = map.keySet().iterator();
+        return iteratorMap;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return map.isEmpty();
+    }
+
+    @Override
+    public boolean contains(Object o) {
+        return map.keySet().contains(o);
+    }
+
+    @Override
+    public boolean remove(Object o) {
+        return map.keySet().remove(o);
+    }
+
+    @Override
+    public void clear() {
+        map.clear();
     }
 
     @Override
     public int size() {
-        return 0;
+        return map.size();
     }
+
+
 }
