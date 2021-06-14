@@ -5,7 +5,6 @@ Cloneable
 */
 
 public class Solution {
-
     public static void main(String[] args) throws CloneNotSupportedException {
         Test1 test1 = new Test1();
         test1.clone();
@@ -20,8 +19,7 @@ public class Solution {
         test4.clone();
     }
 
-
-    public static class Test1 {
+    public static class Test1 implements Cloneable {
         protected Test1 clone() throws CloneNotSupportedException {
             return (Test1) super.clone();
         }
@@ -39,9 +37,14 @@ public class Solution {
         }
     }
 
-    public static class Test4 extends Test3 {
+    public static class Test4 extends Test3 implements Cloneable {
         protected Object c1one() throws CloneNotSupportedException {
             return super.c1one();
+        }
+
+        @Override
+        protected Object clone() throws CloneNotSupportedException {
+            return super.clone();
         }
     }
 }
