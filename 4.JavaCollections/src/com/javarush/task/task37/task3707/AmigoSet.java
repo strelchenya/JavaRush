@@ -52,5 +52,17 @@ public class AmigoSet<E> extends AbstractSet<E> implements Set<E>, Cloneable, Se
         return map.size();
     }
 
+    @Override
+    public Object clone(){
+        AmigoSet<E> amigoSet = null;
+        try {
+            amigoSet = new AmigoSet<>();
+            amigoSet.addAll(this);
+            amigoSet.map.putAll((Map) this.map.clone());
+        } catch (Exception e){
+            throw new InternalError();
+        }
 
+        return amigoSet;
+    }
 }
