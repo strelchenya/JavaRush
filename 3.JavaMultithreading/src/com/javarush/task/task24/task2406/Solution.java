@@ -20,6 +20,18 @@ public class Solution {
         }
     }
 
+    public class Apt3Bedroom extends Building.Apartments{
+        Apt3Bedroom(Building building){
+            building.super();
+        }
+    }
+    public class BigHall extends Building.Hall{
+
+        private BigDecimal bigDecimal;
+        BigHall(Building building, BigDecimal bigDecimal) {
+            building.super(bigDecimal);
+        }
+    }
     public static void main(String[] args) {
 
     }
