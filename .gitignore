@@ -9,6 +9,7 @@ JavaRushPlugin.properties
 # Log file
 out.log
 *.log
+*.log.1
 
 # BlueJ files
 *.ctxt
