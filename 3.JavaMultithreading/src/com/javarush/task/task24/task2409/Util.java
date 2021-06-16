@@ -15,8 +15,68 @@ public class Util {
     }
 
     public static List<Jeans> getAllJeans() {
+        abstract class AbstractJeans implements Jeans {
+            private int id;
+            private int length;
+            private int size;
+            private double price;
 
-        //add your code here
+            protected AbstractJeans(int id, int length, int size, double price) {
+                this.id = id;
+                this.length = length;
+                this.size = size;
+                this.price = price;
+            }
+
+            public abstract String getTM();
+
+            public int getId() {
+                return id;
+            }
+
+            public int getLength() {
+                return length;
+            }
+
+            public int getSize() {
+                return size;
+            }
+
+            public double getPrice() {
+                return price;
+            }
+
+            @Override
+            public String toString() {
+                return getClass().getSimpleName() + "{" +
+                        "id=" + id +
+                        ", length=" + length +
+                        ", size=" + size +
+                        ", price=" + price +
+                        '}';
+            }
+        }
+
+        class Levis extends AbstractJeans {
+            Levis(int id, int length, int size, double price) {
+                super(id, length, size, price);
+            }
+
+            @Override
+            public String getTM() {
+                return "Levis";
+            }
+        }
+        class Denim extends AbstractJeans {
+            Denim(int id, int length, int size, double price) {
+                super(id, length, size, price);
+            }
+
+            @Override
+            public String getTM() {
+                return "Denim";
+            }
+        }
 
         List<Jeans> allJeans = new LinkedList<>();
 
@@ -34,6 +94,8 @@ public class Util {
                 jeans = new Denim(id, length, size, price);
             } else {
                 jeans = new AbstractJeans(id, length, size, price) {
+
+
                     public String getTM() {
                         return company.fullName;
                     }
