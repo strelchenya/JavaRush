@@ -21,11 +21,13 @@ public class Solution {
     public static void printStocks(List<Stock> stocks, Date actualDate) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
+        // минимальные значения
         double[] filelimits = {0d, actualDate.getTime()};
+        // строки, выбираемые в случае превышения мин. значения
         String[] filepart = {"change {4}", "open {2} and last {3}"};
 
         ChoiceFormat fileform = new ChoiceFormat(filelimits, filepart);
-        Format[] testFormats = {null, dateFormat, fileform};
+        Format[] testFormats = {null, null, dateFormat, fileform};
         MessageFormat pattform = new MessageFormat("{0}   {1} | {5} {6}");
         pattform.setFormats(testFormats);
 
@@ -44,9 +46,34 @@ public class Solution {
     public static void sort(List<Stock> list) {
         list.sort(new Comparator<Stock>() {
             public int compare(Stock stock1, Stock stock2) {
-                return 0;
+
+                return ((String) stock1.get("name")).compareTo(((String) stock2.get("name")));
             }
-        });
+        }.thenComparing(new Comparator<Stock>() {
+            @Override
+            public int compare(Stock stock1, Stock stock2) {
+                return ((Date) stock2.get("date")).compareTo(((Date) stock1.get("date")));
+            }
+        }.thenComparing(new Comparator<Stock>() {
+            @Override
+            public int compare(Stock stock1, Stock stock2) {
+
+                double profit1;
+                if (stock1.containsKey("change"))
+                    profit1 = (double) stock1.get("change");
+                else
+                    profit1 = (double) stock1.get("last") - (double) stock1.get("open");
+
+                double profit2;
+                if (stock2.containsKey("change"))
+                    profit2 = (double) stock2.get("change");
+                else
+                    profit2 = (double) stock2.get("last") - (double) stock2.get("open");
+
+                if ((profit1 - profit2) >= 0) return -1;
+                return 1;
+            }
+        })));
     }
 
     public static class Stock extends HashMap<String, Object> {
