@@ -9,14 +9,15 @@ import java.util.List;
 public class UsersView implements View {
     private Controller controller;
 
-    public void fireEventShowAllUsers(){
+    public void fireEventShowAllUsers() {
         controller.onShowAllUsers();
     }
+
     @Override
     public void refresh(ModelData modelData) {
-        if (modelData.isDisplayDeletedUserList()){
+        if (modelData.isDisplayDeletedUserList()) {
             System.out.println("All deleted users:");
-        }else {
+        } else {
             System.out.println("All users:");
         }
 
@@ -29,7 +30,11 @@ public class UsersView implements View {
     }
 
     public void fireEventShowDeletedUsers() {
-    controller.onShowAllDeletedUsers();
+        controller.onShowAllDeletedUsers();
+    }
+
+    public void fireEventOpenUserEditForm(long id) {
+        controller.onOpenUserEditForm(id);
     }
 
     @Override
