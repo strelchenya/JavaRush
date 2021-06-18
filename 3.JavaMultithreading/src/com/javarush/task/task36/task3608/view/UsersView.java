@@ -23,6 +23,10 @@ public class UsersView implements View {
         System.out.println("===================================================");
     }
 
+    public void fireEventShowDeletedUsers() {
+    controller.onShowAllDeletedUsers();
+    }
+
     @Override
     public void setController(Controller controller) {
         this.controller = controller;

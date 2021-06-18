@@ -15,5 +15,4 @@ public class ModelData {
         this.users = users;
     }
 
-
 }

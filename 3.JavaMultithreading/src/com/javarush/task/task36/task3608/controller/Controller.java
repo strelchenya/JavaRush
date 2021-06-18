@@ -20,4 +20,9 @@ public class Controller {
         this.model = model;
     }
 
+    public void onShowAllDeletedUsers() {
+        model.loadDeletedUsers();
+        usersView.refresh(model.getModelData());
+    }
+
 }
