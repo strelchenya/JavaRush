@@ -21,7 +21,15 @@ public class Solution {
         protected List<Wheel> wheels;
 
         public Car() {
-            //init wheels here
+            wheels = new ArrayList<Wheel>();
+
+            String[] tmp = loadWheelNamesFromDB();
+
+            if (tmp.length!=4)
+                throw new IllegalArgumentException();
+            else
+                for (int i = 0; i<tmp.length; i++)
+                    wheels.add(Wheel.valueOf(tmp[i]));
         }
 
         protected String[] loadWheelNamesFromDB() {
