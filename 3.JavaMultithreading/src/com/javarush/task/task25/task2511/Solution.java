@@ -15,7 +15,16 @@ public class Solution extends TimerTask {
             throw new NullPointerException();
         }
         this.original = original;
-        this.handler = null;    //init handler here
+        this.handler = new Thread.UncaughtExceptionHandler() {
+            @Override
+            public void uncaughtException(Thread t, Throwable e) {
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < t.getName().length(); i++) {
+                    builder.append('*');
+                }
+                System.out.println(e.getMessage().replaceAll(t.getName(), builder.toString()));
+            }
+        };
     }
 
     public void run() {
