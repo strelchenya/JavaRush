@@ -19,7 +19,6 @@ public class Solution implements Thread.UncaughtExceptionHandler {
             e = e.getCause();
 
         }
-
         for (String s : res) {
             System.out.println(s);
         }
