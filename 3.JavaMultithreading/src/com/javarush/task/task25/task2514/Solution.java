@@ -10,10 +10,12 @@ public class Solution {
 
         public YieldRunnable(int index) {
             this.index = index;
+
         }
 
         public void run() {
             System.out.println("begin-" + index);
+            Thread.yield();
             System.out.println("end-" + index);
         }
     }
