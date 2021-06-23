@@ -1,7 +1,9 @@
 package com.javarush.task.task29.task2909.human;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class University {
     private List<Student> students;
@@ -24,7 +26,51 @@ public class University {
         this.age = age;
     }
 
-    public  List<Student> getStudents() {
+    public Student getStudentWithAverageGrade(double averageGrade) {
+        for (Student student : students) {
+            if (student.getAverageGrade() == averageGrade)
+                return student;
+        }
+        return null;
+    }
+
+    public Student getStudentWithMaxAverageGrade() {
+        if (students.size() > 0) {
+            Student studentWithMaxAverageGrade = students.get(0);
+            double maxAverageGrade = studentWithMaxAverageGrade.getAverageGrade();
+
+            for (Student student : students) {
+                if (student.getAverageGrade() > maxAverageGrade) {
+                    studentWithMaxAverageGrade = student;
+                    maxAverageGrade = student.getAverageGrade();
+                }
+            }
+            return studentWithMaxAverageGrade;
+        }
+        return null;
+    }
+
+    public Student getStudentWithMinAverageGrade() {
+        if (students.size() > 0) {
+            Student studentWithMinAverageGrade = students.get(0);
+            double maxAverageGrade = studentWithMinAverageGrade.getAverageGrade();
+
+            for (Student student : students) {
+                if (student.getAverageGrade() < maxAverageGrade) {
+                    studentWithMinAverageGrade = student;
+                    maxAverageGrade = student.getAverageGrade();
+                }
+            }
+            return studentWithMinAverageGrade;
+        }
+        return null;
+    }
+
+    public void expel(Student student) {
+        students.remove(student);
+    }
+
+    public List<Student> getStudents() {
         return students;
     }
 
@@ -36,19 +82,5 @@ public class University {
         this.name = name;
         this.age = age;
         this.students = new ArrayList<>();
-    }
-
-    public Student getStudentWithAverageGrade() {
-        //TODO:
-        return null;
-    }
-
-    public Student getStudentWithMaxAverageGrade(double averageGrade) {
-        //TODO:
-        return null;
-    }
-
-    public void getStudentWithMinAverageGradeAndExpel() {
-        //TODO:
     }
 }
