@@ -15,6 +15,14 @@ public class Teacher extends Human {
         this.numberOfStudents = numberOfStudents;
     }
 
+//    public List<Human> getChildren() {
+//        return children;
+//    }
+
+//    public void setChildren(List<Human> children) {
+//        this.children = children;
+//    }
+
     public void live() {
         teach();
     }
