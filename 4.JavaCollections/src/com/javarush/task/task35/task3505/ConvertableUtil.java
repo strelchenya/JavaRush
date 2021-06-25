@@ -1,13 +1,18 @@
 package com.javarush.task.task35.task3505;
 
+import java.security.Key;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class ConvertableUtil {
 
-    public static Map convert(List list) {
-        Map result = new HashMap();
+    public static <K , V extends Convertable<K>> Map convert(List <V> list) {
+        Map <K, V> result = new HashMap();
+        for (V v: list) {
+            result.put(v.getKey(), v);
+        }
+
         return result;
     }
 }
