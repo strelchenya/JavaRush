@@ -6,8 +6,8 @@ import java.util.List;
 Знакомство с дженериками
 */
 
-public class Solution {
-    public static class SomeClass {
+public class Solution <Y extends List<Solution.SomeClass>> {
+    public static class SomeClass <T extends Number>{
     }
 
     public static void main(String[] args) {
