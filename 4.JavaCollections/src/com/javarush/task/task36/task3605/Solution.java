@@ -1,11 +1,9 @@
 package com.javarush.task.task36.task3605;
 
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Locale;
 import java.util.TreeSet;
 
 /* 
@@ -27,7 +25,6 @@ public class Solution {
                     treeSetCharacter.add(String.valueOf(symbol).toLowerCase());
                 }
             }
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
