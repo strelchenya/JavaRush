@@ -61,7 +61,7 @@ public class Solution {
     }
 
     public HiddenClass getHiddenClassObjectByKey(String key) {
-       /* String lowerKey = key.toLowerCase();
+        String lowerKey = key.toLowerCase();
         try {
             Class resultClass = null;
             for (Class aClass : hiddenClasses) {
@@ -80,7 +80,7 @@ public class Solution {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
             e.printStackTrace();
-        }*/
+        }
         return null;
     }
 }
