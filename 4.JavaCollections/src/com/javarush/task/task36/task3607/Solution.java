@@ -7,11 +7,12 @@ import java.util.concurrent.DelayQueue;
 */
 
 public class Solution {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClassNotFoundException {
         System.out.println(getExpectedClass());
     }
 
-    public static Class getExpectedClass() {
-        return null;
+    public static Class getExpectedClass() throws ClassNotFoundException {
+
+        return DelayQueue.class;
     }
 }
