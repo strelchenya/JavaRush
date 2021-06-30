@@ -23,12 +23,12 @@ public class Solution {
         System.out.println(map.remove(5));              // Expected: 56
         System.out.println(map);                        // Expected: {0=0, 1=1, 2=2, 3=3, 4=4, 5=57, 58, 6=6}
         System.out.println(map.size());                 // Expected: size = 8
-/*
+
         System.out.println(map.keySet());               // Expected: [0, 1, 2, 3, 4, 5, 6]
         System.out.println(map.values());               // Expected: [0, 1, 2, 3, 4, 57, 58, 6]
 
         System.out.println(map.containsKey(5));         // Expected: true
         System.out.println(map.containsValue(57));      // Expected: true
-        System.out.println(map.containsValue(7));*/       // Expected: false
+        System.out.println(map.containsValue(7));       // Expected: false
     }
 }

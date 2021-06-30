@@ -68,30 +68,46 @@ public class MyMultiMap<K, V> extends HashMap<K, V> implements Cloneable, Serial
             return v;
         }
         map.remove(key);
-        return null;
+        return v;
     }
 
     @Override
     public Set<K> keySet() {
-        return null;
+        Set<K> setKey = new HashSet<>();
+        for (Map.Entry<K, List<V>> element: map.entrySet()) {
+            setKey.add(element.getKey());
+        }
+        return setKey;
     }
 
     @Override
     public Collection<V> values() {
-        //напишите тут ваш код
-        return  null;
+        List<V> listValue = new ArrayList<>();
+        for (Map.Entry<K, List<V>> element: map.entrySet()) {
+            for (V v : element.getValue()) {
+                listValue.add(v);
+            }
+        }
+        return listValue;
     }
 
     @Override
     public boolean containsKey(Object key) {
-
-        //напишите тут ваш код
+        if (map.containsKey(key)){
+            return true;
+        }
         return false;
     }
 
     @Override
     public boolean containsValue(Object value) {
-        //напишите тут ваш код
+        for (Map.Entry<K, List<V>> element: map.entrySet()) {
+            for (V v :element.getValue()) {
+                if (v.equals(value)){
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
