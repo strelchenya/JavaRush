@@ -9,23 +9,11 @@ public class HashMapStorageStrategy implements StorageStrategy {
 
     @Override
     public boolean containsKey(Long key) {
-        /*for (Map.Entry<Long, String> map : data.entrySet()) {
-            if (map.getKey().equals(key)) {
-                return true;
-            }
-        }
-        return false;*/
         return data.containsKey(key);
     }
 
     @Override
     public boolean containsValue(String value) {
-        /*for (Map.Entry<Long, String> map : data.entrySet()) {
-            if (map.getValue().equals(value)) {
-                return true;
-            }
-        }
-        return false;*/
         return data.containsValue(value);
     }
 
