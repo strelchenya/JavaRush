@@ -1,9 +1,9 @@
 package com.javarush.task.task33.task3310.strategy;
 
-import com.google.common.collect.HashBiMap;
+import org.apache.commons.collections4.bidimap.DualHashBidiMap;
 
-public class HashBiMapStorageStrategy implements StorageStrategy {
-    private HashBiMap<Long, String> data = HashBiMap.create();
+public class DualHashBidiMapStorageStrategy implements StorageStrategy {
+    private DualHashBidiMap<Long, String> data = new DualHashBidiMap();
 
     @Override
     public boolean containsKey(Long key) {
@@ -17,17 +17,16 @@ public class HashBiMapStorageStrategy implements StorageStrategy {
 
     @Override
     public void put(Long key, String value) {
-
-        data.put(key,value);
+        data.put(key, value);
     }
 
     @Override
     public Long getKey(String value) {
-        return data.inverse().get(value);
+        return data.getKey(value);
     }
 
     @Override
     public String getValue(Long key) {
-        return  data.get(key);
+        return data.get(key);
     }
 }
