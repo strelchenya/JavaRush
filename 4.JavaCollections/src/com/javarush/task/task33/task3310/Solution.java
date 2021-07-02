@@ -11,8 +11,11 @@ public class Solution {
         HashMapStorageStrategy hashMapStorageStrategy = new HashMapStorageStrategy();
         testStrategy(hashMapStorageStrategy, 10000);
         testStrategy(new OurHashMapStorageStrategy(), 10000);
-        testStrategy(new FileStorageStrategy(), 10000);
         testStrategy(new OurHashBiMapStorageStrategy(), 10000);
+        testStrategy(new HashBiMapStorageStrategy(), 10000);
+        testStrategy(new FileStorageStrategy(), 10000);
+
+
 
     }
 
