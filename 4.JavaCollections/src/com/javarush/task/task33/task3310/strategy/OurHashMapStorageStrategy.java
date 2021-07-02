@@ -98,7 +98,6 @@ public class OurHashMapStorageStrategy implements StorageStrategy {
             hash = hash(key);
             bucketIndex = indexFor(hash, table.length);
         }
-
         createEntry(hash, key, value, bucketIndex);
     }
 
