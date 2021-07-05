@@ -10,9 +10,12 @@ public class Solution {
         LoggingStateThread loggingStateThread = new LoggingStateThread(target);
 
         loggingStateThread.start(); //NEW
+        System.out.println(loggingStateThread.getState());
         Thread.sleep(100);
         target.start();  //RUNNABLE
+        System.out.println(loggingStateThread.getState());
         Thread.sleep(100);
+        System.out.println(loggingStateThread.getState());
         //TERMINATED
     }
 }

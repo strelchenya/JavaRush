@@ -1,11 +1,12 @@
 package com.javarush.task.task25.task2506;
 
-public class LoggingStateThread extends Thread{
+public class LoggingStateThread extends Thread {
+
     private Thread thread;
 
     public LoggingStateThread(Thread thread) {
-//        super(target);
         this.thread = thread;
+        setDaemon(true);
     }
 
     @Override
