@@ -26,6 +26,12 @@ public class LogParser implements IPQuery, UserQuery, DateQuery, EventQuery, QLQ
     @Override
     public Set<Object> execute(String query) {
         Set<Object> objectSet = new HashSet<>();
+        String[] queryArray = new String[2];
+        if (query.contains(" = ")){
+            queryArray[0] = query.split(" = ")[0];
+            queryArray[1] = query.split(" = ")[1];
+        }
+
         switch (query) {
             case "get ip":
                 objectSet.addAll(getUniqueIPs(null, null));
@@ -48,6 +54,7 @@ public class LogParser implements IPQuery, UserQuery, DateQuery, EventQuery, QLQ
                 break;
         }
 
+        switch ()
 
         return objectSet;
     }
