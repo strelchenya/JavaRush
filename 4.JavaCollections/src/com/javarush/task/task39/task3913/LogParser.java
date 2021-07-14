@@ -12,6 +12,8 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class LogParser implements IPQuery, UserQuery, DateQuery, EventQuery, QLQuery {
     private Path logDir;
@@ -23,42 +25,7 @@ public class LogParser implements IPQuery, UserQuery, DateQuery, EventQuery, QLQ
         readLogs();
     }
 
-    @Override
-    public Set<Object> execute(String query) {
-        Set<Object> objectSet = new HashSet<>();
-        String[] queryArray = new String[2];
-        if (query.contains(" = ")){
-            queryArray[0] = query.split(" = ")[0];
-            queryArray[1] = query.split(" = ")[1];
-        }
-
-        switch (query) {
-            case "get ip":
-                objectSet.addAll(getUniqueIPs(null, null));
-                break;
-            case "get user":
-                objectSet.addAll(getAllUsers());
-                break;
-            case "get date":
-                for (int i = 0; i < logEntities.size(); i++) {
-                    objectSet.add((Object) logEntities.get(i).date);
-                }
-                break;
-            case "get event":
-                objectSet.addAll(getAllEvents(null, null));
-                break;
-            case "get status":
-                for (int i = 0; i < logEntities.size(); i++) {
-                    objectSet.add((Object) logEntities.get(i).status);
-                }
-                break;
-        }
-
-        switch ()
-
-        return objectSet;
-    }
-
+    
     @Override
     public int getNumberOfUniqueIPs(Date after, Date before) {
         return getUniqueIPs(after, before).size();
@@ -516,6 +483,46 @@ public class LogParser implements IPQuery, UserQuery, DateQuery, EventQuery, QLQ
         return result;
     }
 
+    @Override
+    public Set<Object> execute(String query) {
+        Set<Object> result = new HashSet<>();
+        String field1;
+        String field2 = null;
+        String value1 = null;
+        Pattern pattern = Pattern.compile("get (ip|user|date|event|status)"
+                + "( for (ip|user|date|event|status) = \"(.*?)\")?");
+        Matcher matcher = pattern.matcher(query);
+        matcher.find();
+        field1 = matcher.group(1);
+        if (matcher.group(2) != null) {
+            field2 = matcher.group(3);
+            value1 = matcher.group(4);
+        }
+
+        if (field2 != null && value1 != null) {
+            for (int i = 0; i < logEntities.size(); i++) {
+                if (field2.equals("date")) {
+                    try {
+                        if (logEntities.get(i).getDate().getTime() == simpleDateFormat.parse(value1).getTime()) {
+                            result.add(getCurrentValue(logEntities.get(i), field1));
+                        }
+                    } catch (ParseException e) {
+                    }
+                } else {
+                    if (value1.equals(getCurrentValue(logEntities.get(i), field2).toString())) {
+                        result.add(getCurrentValue(logEntities.get(i), field1));
+                    }
+                }
+            }
+        } else {
+            for (int i = 0; i < logEntities.size(); i++) {
+                result.add(getCurrentValue(logEntities.get(i), field1));
+            }
+        }
+
+        return result;
+    }
+
     private void readLogs() {
         try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(logDir)) {
             for (Path file : directoryStream) {
@@ -623,6 +630,38 @@ public class LogParser implements IPQuery, UserQuery, DateQuery, EventQuery, QLQ
         return current.after(after) && current.before(before);
     }
 
+    private Object getCurrentValue(LogEntity logEntity, String field) {
+        Object value = null;
+        switch (field) {
+            case "ip": {
+                Command method = new GetIpCommand(logEntity);
+                value = method.execute();
+                break;
+            }
+            case "user": {
+                Command method = new GetUserCommand(logEntity);
+                value = method.execute();
+                break;
+            }
+            case "date": {
+                Command method = new GetDateCommand(logEntity);
+                value = method.execute();
+                break;
+            }
+            case "event": {
+                Command method = new GetEventCommand(logEntity);
+                value = method.execute();
+                break;
+            }
+            case "status": {
+                Command method = new GetStatusCommand(logEntity);
+                value = method.execute();
+                break;
+            }
+        }
+        return value;
+    }
+
     private class LogEntity {
         private String ip;
         private String user;
@@ -662,6 +701,67 @@ public class LogParser implements IPQuery, UserQuery, DateQuery, EventQuery, QLQ
 
         public Status getStatus() {
             return status;
+        }
+    }
+
+    private abstract class Command {
+        protected LogEntity logEntity;
+
+        abstract Object execute();
+    }
+
+    private class GetIpCommand extends Command {
+        public GetIpCommand(LogEntity logEntity) {
+            this.logEntity = logEntity;
+        }
+
+        @Override
+        Object execute() {
+            return logEntity.getIp();
+        }
+    }
+
+    private class GetUserCommand extends Command {
+        public GetUserCommand(LogEntity logEntity) {
+            this.logEntity = logEntity;
+        }
+
+        @Override
+        Object execute() {
+            return logEntity.getUser();
+        }
+    }
+
+    private class GetDateCommand extends Command {
+        public GetDateCommand(LogEntity logEntity) {
+            this.logEntity = logEntity;
+        }
+
+        @Override
+        Object execute() {
+            return logEntity.getDate();
+        }
+    }
+
+    private class GetEventCommand extends Command {
+        public GetEventCommand(LogEntity logEntity) {
+            this.logEntity = logEntity;
+        }
+
+        @Override
+        Object execute() {
+            return logEntity.getEvent();
+        }
+    }
+
+    private class GetStatusCommand extends Command {
+        public GetStatusCommand(LogEntity logEntity) {
+            this.logEntity = logEntity;
+        }
+
+        @Override
+        Object execute() {
+            return logEntity.getStatus();
         }
     }
 }
