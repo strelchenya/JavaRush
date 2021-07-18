@@ -17,7 +17,6 @@ public class HHStrategy implements Strategy {
     @Override
     public List<Vacancy> getVacancies(String searchString) {
         List<Vacancy> allVacancies = new ArrayList<>();
-        Document document = null;
 
         int page = 0;
         try {
@@ -56,7 +55,7 @@ public class HHStrategy implements Strategy {
 
     protected Document getDocument(String searchString, int page) throws IOException {
         return Jsoup.connect(String.format(URL_FORMAT, searchString, page))
-                .userAgent("Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36")
+                .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.164 Safari/537.36")
                 .referrer("https://hh.ru/")
                 .get();
     }
