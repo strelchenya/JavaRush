@@ -24,7 +24,7 @@ public class Model {
             vacancies.addAll(provider.getJavaVacancies(city));
 
         }
-
+        
         view.update(vacancies);
     }
 }
