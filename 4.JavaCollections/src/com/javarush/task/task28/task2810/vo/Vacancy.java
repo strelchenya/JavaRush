@@ -64,11 +64,14 @@ public class Vacancy {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Vacancy vacancy = (Vacancy) o;
-        return Objects.equals(title, vacancy.title) && Objects.equals(salary, vacancy.salary) && Objects.equals(city, vacancy.city) && Objects.equals(companyName, vacancy.companyName) && Objects.equals(siteName, vacancy.siteName) && Objects.equals(url, vacancy.url);
+        return Objects.equals(title, vacancy.title) && Objects.equals(salary, vacancy.salary)
+                && Objects.equals(city, vacancy.city) && Objects.equals(companyName, vacancy.companyName)
+                && Objects.equals(siteName, vacancy.siteName) && Objects.equals(url, vacancy.url);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(title, salary, city, companyName, siteName, url);
     }
+
 }
