@@ -21,6 +21,15 @@ public class Solution {
     }
 
     public static boolean isWeightEven(long number) {
-        return false;
+        /*number ^= number >>> 32;
+        number ^= number >>> 16;
+        number ^= number >>> 8;
+        number ^= number >>> 4;
+        number ^= number >>> 2;
+        number ^= number >>> 1;
+
+        return (number & 1) == 0;*/
+
+        return Long.bitCount(number) % 2 == 0;
     }
 }
