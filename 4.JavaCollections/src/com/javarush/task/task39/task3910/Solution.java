@@ -6,12 +6,14 @@ isPowerOfThree
 
 public class Solution {
     public static void main(String[] args) {
-
+        System.out.println(isPowerOfThree(1));
     }
 
     public static boolean isPowerOfThree(int n) {
-        if (n % 3 == 0) {
-            return true;
+        for (int i = 1; i <= n; i *= 3) {
+            if (i == n) {
+                return true;
+            }
         }
         return false;
     }
