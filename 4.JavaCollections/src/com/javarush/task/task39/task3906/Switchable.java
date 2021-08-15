@@ -2,9 +2,9 @@ package com.javarush.task.task39.task3906;
 
 public interface Switchable {
 
-    public boolean isOn();
+     boolean isOn();
 
-    public void turnOff();
+     void turnOff();
 
-    public void turnOn();
+     void turnOn();
 }
