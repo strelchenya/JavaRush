@@ -9,8 +9,8 @@ public class CashMachine {
 
         String currencyCode = ConsoleHelper.askCurrencyCode();
         String[] nominalAndQuantity = ConsoleHelper.getValidTwoDigits(currencyCode);
-        Integer denomination = Integer.parseInt(nominalAndQuantity[0]);
-        Integer count = Integer.parseInt(nominalAndQuantity[1]);
+        int denomination = Integer.parseInt(nominalAndQuantity[0]);
+        int count = Integer.parseInt(nominalAndQuantity[1]);
 
 
         CurrencyManipulator currencyManipulator =
