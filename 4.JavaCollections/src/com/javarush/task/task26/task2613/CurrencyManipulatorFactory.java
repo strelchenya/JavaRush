@@ -1,5 +1,7 @@
 package com.javarush.task.task26.task2613;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,4 +24,7 @@ public class CurrencyManipulatorFactory {
     }
 
 
+   public static Collection<CurrencyManipulator> getAllCurrencyManipulators(){
+        return new ArrayList<>(map.values());
+   }
 }

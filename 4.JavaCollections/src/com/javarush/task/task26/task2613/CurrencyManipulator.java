@@ -35,4 +35,9 @@ public class CurrencyManipulator {
 
         return totalAmount;
     }
+
+    public boolean hasMoney(){
+
+        return denominations.size() > 0 && getTotalAmount() > 0;
+    }
 }
