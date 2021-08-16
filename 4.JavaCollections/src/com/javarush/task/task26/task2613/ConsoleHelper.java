@@ -36,15 +36,38 @@ public class ConsoleHelper {
     }
 
     public static String[] getValidTwoDigits(String currencyCode) {
-        while (true){
+        while (true) {
             System.out.println("Enter nominal and quantity:");
             String nominalAndQuantity = readString();
 
-            if (nominalAndQuantity.matches("^\\d+ \\d+$")){
+            if (nominalAndQuantity.matches("^\\d+ \\d+$")) {
                 String[] value = nominalAndQuantity.split(" ");
                 return value;
             }
             System.out.println("The data is incorrect, please re-enter the data." + currencyCode);
+        }
+    }
+
+    public static Operation askOperation() {
+
+        while (true) {
+
+            System.out.println("What operation would you like to perform? " + "\n" +
+                    "Enter a number: 1 - INFO, 2 - DEPOSIT, 3 - WITHDRAW, 4 - EXIT.");
+
+            int number = 0;
+
+            try {
+                number = Integer.parseInt(bis.readLine());
+            } catch (IOException e) {
+            }
+
+            if (number > 0 && number < 5) {
+               return Operation.getAllowableOperationByOrdinal(number);
+            }
+
+            System.out.println("You entered an invalid operation! " + "\n" +
+                    "Valid operations: 1 - INFO, 2 - DEPOSIT, 3 - WITHDRAW, 4 - EXIT.");
         }
     }
 
