@@ -1,5 +1,7 @@
 package com.javarush.task.task26.task2613;
 
+import com.javarush.task.task26.task2613.exception.InterruptOperationException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -12,21 +14,27 @@ public class ConsoleHelper {
         System.out.println(message);
     }
 
-    public static String readString() {
+    public static String readString() throws InterruptOperationException {
         String line = "";
         try {
             line = bis.readLine();
+
         } catch (IOException e) {
 
+        }
+
+        if (line.toLowerCase().equals("exit")) {
+            throw new InterruptOperationException();
         }
         return line;
     }
 
-    public static String askCurrencyCode() {
+    public static String askCurrencyCode() throws InterruptOperationException {
         while (true) {
             System.out.println("Enter currency code:");
 
             String currencyCode = readString().toUpperCase();
+
             if (currencyCode.length() == 3) {
                 return currencyCode;
             }
@@ -35,7 +43,7 @@ public class ConsoleHelper {
         }
     }
 
-    public static String[] getValidTwoDigits(String currencyCode) {
+    public static String[] getValidTwoDigits(String currencyCode) throws InterruptOperationException {
         while (true) {
             System.out.println("Enter nominal and quantity:");
             String nominalAndQuantity = readString();
@@ -48,7 +56,7 @@ public class ConsoleHelper {
         }
     }
 
-    public static Operation askOperation() {
+    public static Operation askOperation() throws InterruptOperationException {
 
         while (true) {
 
@@ -57,13 +65,13 @@ public class ConsoleHelper {
 
             int number = 0;
 
-            try {
-                number = Integer.parseInt(bis.readLine());
-            } catch (IOException e) {
-            }
+
+            String operation = readString();
+
+            number = Integer.parseInt(operation);
 
             if (number > 0 && number < 5) {
-               return Operation.getAllowableOperationByOrdinal(number);
+                return Operation.getAllowableOperationByOrdinal(number);
             }
 
             System.out.println("You entered an invalid operation! " + "\n" +
