@@ -1,7 +1,6 @@
 package com.javarush.task.task26.task2613;
 
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 public class CurrencyManipulatorFactory {
@@ -15,7 +14,7 @@ public class CurrencyManipulatorFactory {
         if (currencyCode == null || currencyCode.isEmpty()){
             return null;
         }
-        currencyCode = currencyCode.toUpperCase(Locale.ROOT);
+        currencyCode = currencyCode.toUpperCase();
 
         map.putIfAbsent(currencyCode, new CurrencyManipulator(currencyCode));
 
