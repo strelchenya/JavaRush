@@ -21,6 +21,8 @@ public class Solution {
         DateTimeFormatter yearFormat = DateTimeFormatter.ofPattern("y");
         Year yearDate = Year.parse(year, yearFormat);
 
-        return birthdayDate.withYear(yearDate.getValue()).format(DateTimeFormatter.ofPattern("EEEE").withLocale(Locale.ITALIAN));
+        return birthdayDate.withYear(yearDate
+                .getValue())
+                .format(DateTimeFormatter.ofPattern("EEEE").withLocale(Locale.ITALIAN));
     }
 }
