@@ -10,7 +10,9 @@ public class CashMachine {
        try {
            Locale.setDefault(Locale.ENGLISH);
 
-           boolean isExit = true;
+           CommandExecutor.execute(Operation.LOGIN);
+
+           boolean isExit = false;
 
            do {
 
@@ -27,12 +29,12 @@ public class CashMachine {
                        CommandExecutor.execute(Operation.WITHDRAW);
                        break;
                    case EXIT:
-                       isExit = false;
+                       isExit = true;
                        CommandExecutor.execute(Operation.EXIT);
                        break;
                }
 
-           } while (isExit /*!ConsoleHelper.askOperation().equals(Operation.EXIT)*/);
+           } while (!isExit);
 
        }catch (InterruptOperationException exception){
            ConsoleHelper.writeMessage("Goodbye!");

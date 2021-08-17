@@ -25,13 +25,13 @@ class WithdrawCommand implements Command {
 
             if (correctData.matches("^\\d+$")){
 
-                int expecedAmount = Integer.parseInt(correctData);
-                if (currencyManipulator.isAmountAvailable(expecedAmount)){
+                int expectedAmount = Integer.parseInt(correctData);
+                if (currencyManipulator.isAmountAvailable(expectedAmount)){
 
                     Map<Integer, Integer> valueQuantity = new TreeMap<>(Comparator.reverseOrder());
 
                     try {
-                        valueQuantity = currencyManipulator.withdrawAmount(expecedAmount);
+                        valueQuantity = currencyManipulator.withdrawAmount(expectedAmount);
                     } catch (NotEnoughMoneyException e) {
                         ConsoleHelper.writeMessage("There is not enough money in the account.");
                     }
