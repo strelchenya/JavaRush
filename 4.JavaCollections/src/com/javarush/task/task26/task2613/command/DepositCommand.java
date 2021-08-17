@@ -8,10 +8,9 @@ import com.javarush.task.task26.task2613.exception.InterruptOperationException;
 
 import java.util.ResourceBundle;
 
-class DepositCommand implements Command{
 
-    private ResourceBundle res =
-            ResourceBundle.getBundle(CashMachine.class.getPackage().getName() + ".resources.deposit");
+class DepositCommand implements Command {
+    private ResourceBundle res = ResourceBundle.getBundle(CashMachine.RESOURCE_PATH + "deposit");
 
     @Override
     public void execute() throws InterruptOperationException {
