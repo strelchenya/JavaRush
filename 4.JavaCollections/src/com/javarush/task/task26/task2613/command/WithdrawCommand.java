@@ -1,52 +1,53 @@
 package com.javarush.task.task26.task2613.command;
 
+import com.javarush.task.task26.task2613.CashMachine;
 import com.javarush.task.task26.task2613.ConsoleHelper;
 import com.javarush.task.task26.task2613.CurrencyManipulator;
 import com.javarush.task.task26.task2613.CurrencyManipulatorFactory;
 import com.javarush.task.task26.task2613.exception.InterruptOperationException;
 import com.javarush.task.task26.task2613.exception.NotEnoughMoneyException;
 
-import java.util.Comparator;
 import java.util.Map;
-import java.util.TreeMap;
+import java.util.ResourceBundle;
 
 class WithdrawCommand implements Command {
+    private ResourceBundle res = ResourceBundle.getBundle(CashMachine.class.getPackage().getName() + ".resources.withdraw");
+
     @Override
     public void execute() throws InterruptOperationException {
+        ConsoleHelper.writeMessage(res.getString("before"));
 
         String currencyCode = ConsoleHelper.askCurrencyCode();
-        CurrencyManipulator currencyManipulator =
-                CurrencyManipulatorFactory.getManipulatorByCurrencyCode(currencyCode);
+        CurrencyManipulator manipulator = CurrencyManipulatorFactory.getManipulatorByCurrencyCode(currencyCode);
 
         while (true) {
-            ConsoleHelper.writeMessage("Please enter the amount:");
-
-            String correctData = ConsoleHelper.readString();
-
-            if (correctData.matches("^\\d+$")){
-
-                int expectedAmount = Integer.parseInt(correctData);
-                if (currencyManipulator.isAmountAvailable(expectedAmount)){
-
-                    Map<Integer, Integer> valueQuantity = new TreeMap<>(Comparator.reverseOrder());
-
+            try {
+                ConsoleHelper.writeMessage(res.getString("specify.amount"));
+                String s = ConsoleHelper.readString();
+                if (s == null) {
+                    ConsoleHelper.writeMessage(res.getString("specify.not.empty.amount"));
+                } else {
                     try {
-                        valueQuantity = currencyManipulator.withdrawAmount(expectedAmount);
-                    } catch (NotEnoughMoneyException e) {
-                        ConsoleHelper.writeMessage("There is not enough money in the account.");
+                        int amount = Integer.parseInt(s);
+                        boolean isAmountAvailable = manipulator.isAmountAvailable(amount);
+                        if (isAmountAvailable) {
+                            Map<Integer, Integer> denominations = manipulator.withdrawAmount(amount);
+                            for (Integer item : denominations.keySet()) {
+                                ConsoleHelper.writeMessage("\t" + item + " - " + denominations.get(item));
+                            }
+
+                            ConsoleHelper.writeMessage(String.format(res.getString("success.format"), amount, currencyCode));
+                            break;
+                        } else {
+                            ConsoleHelper.writeMessage(res.getString("not.enough.money"));
+                        }
+                    } catch (NumberFormatException e) {
+                        ConsoleHelper.writeMessage(res.getString("specify.not.empty.amount"));
                     }
-
-                    for (Map.Entry<Integer, Integer> entry: valueQuantity.entrySet()) {
-                        ConsoleHelper.writeMessage("\t" + entry.getKey() + " - " + entry.getValue());
-                    }
-
-                    ConsoleHelper.writeMessage("Successful transaction.");
-
-                    break;
                 }
+            } catch (NotEnoughMoneyException e) {
+                ConsoleHelper.writeMessage(res.getString("exact.amount.not.available"));
             }
-
-            ConsoleHelper.writeMessage("You entered incorrect data. Please repeat.");
         }
     }
 }

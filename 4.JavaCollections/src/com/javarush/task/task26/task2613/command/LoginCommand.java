@@ -11,13 +11,15 @@ public class LoginCommand implements Command {
     private ResourceBundle validCreditCards =
             ResourceBundle.getBundle(CashMachine.class.getPackage().getName() + ".resources.verifiedCards");
 
+    private ResourceBundle res =
+            ResourceBundle.getBundle(CashMachine.class.getPackage().getName() + ".resources.login");
 
     @Override
     public void execute() throws InterruptOperationException {
-
+        ConsoleHelper.writeMessage(res.getString("before"));
         while (true) {
 
-            ConsoleHelper.writeMessage("Please enter number card:");
+            ConsoleHelper.writeMessage(res.getString("specify.data"));
             String userNumberCard = ConsoleHelper.readString();
             ConsoleHelper.writeMessage("Please enter pin code card:");
             String userPinCodeCard = ConsoleHelper.readString();
@@ -28,14 +30,17 @@ public class LoginCommand implements Command {
 
                 if (validCreditCards.containsKey(userNumberCard) &&
                         userPinCodeCard.equals(validCreditCards.getString(userNumberCard))) {
-                    ConsoleHelper.writeMessage("Success!");
+                    ConsoleHelper.writeMessage(String.format(res.getString("success.format"), userNumberCard));
                     break;
                 }
             }
-
+            ConsoleHelper.writeMessage(String.format(res.getString("not.verified.format"), userNumberCard));
+            ConsoleHelper.writeMessage(res.getString("try.again.or.exit"));
+            ConsoleHelper.writeMessage(res.getString("try.again.with.details"));
         }
 
-        ConsoleHelper.writeMessage("Your card number and card pin code are not correct.");
+
+
     }
 
 }

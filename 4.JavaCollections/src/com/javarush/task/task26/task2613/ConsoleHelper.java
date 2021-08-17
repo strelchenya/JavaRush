@@ -5,8 +5,12 @@ import com.javarush.task.task26.task2613.exception.InterruptOperationException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ResourceBundle;
 
 public class ConsoleHelper {
+
+    private static ResourceBundle res =
+            ResourceBundle.getBundle(CashMachine.class.getPackage().getName() + ".resources.common");
 
     private static BufferedReader bis = new BufferedReader(new InputStreamReader(System.in));
 
@@ -60,22 +64,17 @@ public class ConsoleHelper {
 
         while (true) {
 
-            System.out.println("What operation would you like to perform? " + "\n" +
-                    "Enter a number: 1 - INFO, 2 - DEPOSIT, 3 - WITHDRAW, 4 - EXIT.");
-
-            int number = 0;
-
-
-            String operation = readString();
-
-            number = Integer.parseInt(operation);
-
-            if (number > 0 && number < 5) {
-                return Operation.getAllowableOperationByOrdinal(number);
+            ConsoleHelper.writeMessage(res.getString("choose.operation"));
+            ConsoleHelper.writeMessage("\t 1 - " + res.getString("operation.INFO"));
+            ConsoleHelper.writeMessage("\t 2 - " + res.getString("operation.DEPOSIT"));
+            ConsoleHelper.writeMessage("\t 3 - " + res.getString("operation.WITHDRAW"));
+            ConsoleHelper.writeMessage("\t 4 - " + res.getString("operation.EXIT"));
+            Integer i = Integer.parseInt(ConsoleHelper.readString().trim());
+            try {
+                return Operation.getAllowableOperationByOrdinal(i);
+            } catch (IllegalArgumentException e) {
+                ConsoleHelper.writeMessage(res.getString("invalid.data"));
             }
-
-            System.out.println("You entered an invalid operation! " + "\n" +
-                    "Valid operations: 1 - INFO, 2 - DEPOSIT, 3 - WITHDRAW, 4 - EXIT.");
         }
     }
 
