@@ -6,39 +6,18 @@ import com.javarush.task.task26.task2613.exception.InterruptOperationException;
 import java.util.Locale;
 
 public class CashMachine {
+
     public static void main(String[] args) {
-       try {
-           Locale.setDefault(Locale.ENGLISH);
-
-           CommandExecutor.execute(Operation.LOGIN);
-
-           boolean isExit = false;
-
-           do {
-
-               Operation operation = ConsoleHelper.askOperation();
-
-               switch (operation) {
-                   case INFO:
-                       CommandExecutor.execute(Operation.INFO);
-                       break;
-                   case DEPOSIT:
-                       CommandExecutor.execute(Operation.DEPOSIT);
-                       break;
-                   case WITHDRAW:
-                       CommandExecutor.execute(Operation.WITHDRAW);
-                       break;
-                   case EXIT:
-                       isExit = true;
-                       CommandExecutor.execute(Operation.EXIT);
-                       break;
-               }
-
-           } while (!isExit);
-
-       }catch (InterruptOperationException exception){
-           ConsoleHelper.writeMessage("Goodbye!");
-       }
-
+        Locale.setDefault(Locale.ENGLISH);
+        try {
+            Operation operation = Operation.LOGIN;
+            CommandExecutor.execute(operation);
+            do {
+                operation = ConsoleHelper.askOperation();
+                CommandExecutor.execute(operation);
+            } while (operation != Operation.EXIT);
+        } catch (InterruptOperationException ignored) {
+            ConsoleHelper.writeMessage("Terminated. Thank you for visiting JavaRush cash machine. Good luck.");
+        }
     }
 }
