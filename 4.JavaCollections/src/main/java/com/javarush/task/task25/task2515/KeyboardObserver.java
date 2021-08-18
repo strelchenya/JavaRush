@@ -1,4 +1,4 @@
-package com.javarush.task.task25.task2515;
+package main.java.com.javarush.task.task25.task2515;
 
 import javax.swing.*;
 import java.awt.*;

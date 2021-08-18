@@ -1,4 +1,4 @@
-package com.javarush.task.task25.task2515;
+package main.java.com.javarush.task.task25.task2515;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -15,9 +15,9 @@ public class Space {
     //Космический корабль
     private SpaceShip ship;
     //Список НЛО
-    private List<Ufo> ufos = new ArrayList<Ufo>();
+    private List<Ufo> ufos = new ArrayList<>();
     //Список бомб
-    private List<Bomb> bombs = new ArrayList<Bomb>();
+    private List<Bomb> bombs = new ArrayList<>();
     //Список ракет
     private List<Rocket> rockets = new ArrayList<Rocket>();
 
