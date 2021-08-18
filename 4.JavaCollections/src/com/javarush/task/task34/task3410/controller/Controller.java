@@ -7,13 +7,16 @@ public class Controller {
 
     public static void main(String[] args) {
 
+        Controller controller = new Controller();
     }
 
     private View view;
     private Model model;
 
     public Controller() {
-        view = new View(this);
         model = new Model();
+        view = new View(this);
+
+        view.init();
     }
 }
