@@ -20,4 +20,5 @@ public class ConsoleHelper {
         String text = readString();
         return Integer.parseInt(text.trim());
     }
+
 }
