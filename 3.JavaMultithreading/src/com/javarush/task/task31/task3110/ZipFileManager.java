@@ -11,7 +11,8 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 public class ZipFileManager {
-    private Path zipFile;
+    // Полный путь zip файла
+    private final Path zipFile;
 
     public ZipFileManager(Path zipFile) {
         this.zipFile = zipFile;
