@@ -1,7 +1,6 @@
 package com.javarush.task.task28.task2802;
 
 import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /* 
 Пишем свою ThreadFactory
@@ -38,5 +37,12 @@ public class Solution {
         factory.newThread(r).start();
         factory.newThread(r).start();
         factory.newThread(r).start();
+    }
+
+    public static class AmigoThreadFactory implements ThreadFactory{
+        @Override
+        public Thread newThread(Runnable r) {
+            return null;
+        }
     }
 }
