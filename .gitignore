@@ -30,7 +30,8 @@ out.log
 hs_err_pid*
 
 ### IntelliJ IDEA ###
-.idea
+/.idea/
+/out/
 *.iws
 *.iml
 *.ipr
