@@ -35,3 +35,5 @@ out
 *.iws
 *.iml
 *.ipr
+/out.log
+/out
